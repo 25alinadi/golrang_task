@@ -1,0 +1,29 @@
+.container{
+    max-width: 1560px;
+    padding: 1rem 3rem;
+    margin: 0 auto;
+}
+
+.align-center{
+    margin: 0 auto;
+}
+
+.mr-2{
+    margin-right: 10px;
+}
+
+.pr-3{
+    padding-right: 15px;
+}
+
+.mt-5{
+    margin-top: 5rem;
+}
+
+.mt-2{
+    margin-top: 2rem;
+}
+
+.mb-1{
+    margin-top: 1rem;
+}
