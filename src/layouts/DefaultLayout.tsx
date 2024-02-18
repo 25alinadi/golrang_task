@@ -9,7 +9,9 @@ const DefaultLayout:React.FC<DefaultLayoutProps> = ({children}: DefaultLayoutPro
     return(
         <main className="container">
             <Header />
-            {children}
+            <section>
+                {children}
+            </section>
         </main>
     )
 }

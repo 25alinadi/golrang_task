@@ -1,13 +1,15 @@
-import { FC, useEffect, useState } from "react";
+import { FC, Suspense, lazy, useEffect, useState } from "react";
 import useAllUsersQuery from "../hooks/userQueries/useAllUserQuery";
-import ListUsers from "../components/ListUsers";
 import { IUserData, IUserListData } from "../types/user.type";
-import SearchSelectInput from "../components/SearchSelectInput";
 import { Flex, Typography } from "antd";
-import SearchInput from "../components/SearchInput";
+import { Loading } from "../components/share/Loading";
+
+const ListUsers = lazy(() => import("../components/ListUsers"))
+const SearchSelectInput = lazy(() => import("../components/SearchSelectInput"))
+const SearchInput = lazy(() => import("../components/SearchInput"))
 
 const App: FC = () => {
-  const { data:usersData, isLoading } = useAllUsersQuery();
+  const { data:usersData } = useAllUsersQuery();
   const [users, setUsers] = useState<IUserListData[]>([])
   const [searchSelect, setSearchSelect] = useState<string|number|null>(null);
   const [searchInput, setSearchInput] = useState<string|number|null>(null);
@@ -42,10 +44,14 @@ const App: FC = () => {
     <>
       <Flex gap="middle" align="center" className="mb-1">
         <Typography.Title level={5}>Filter: </Typography.Title>
-        <SearchSelectInput onChange={setSearchSelect} />
-        <SearchInput onChange={setSearchInput} />
+        <Suspense>
+          <SearchSelectInput onChange={setSearchSelect} />
+          <SearchInput onChange={setSearchInput} />
+        </Suspense>
       </Flex>
-      <ListUsers users={users} isLoading={isLoading} />
+      <Suspense fallback={<Loading />}>
+        <ListUsers users={users} />
+      </Suspense>
     </>
   )
 };

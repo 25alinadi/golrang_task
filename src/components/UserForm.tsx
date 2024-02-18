@@ -1,6 +1,6 @@
 import { IUserData } from "../types/user.type";
 import { Button, Form } from "antd";
-import { MyInput } from "./share/Input";
+import { MyInput } from "./share/MyInput";
 
 type UserFormProps = {
   prevData?: IUserData;
